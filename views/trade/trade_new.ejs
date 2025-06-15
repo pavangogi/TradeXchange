@@ -1,0 +1,56 @@
+<%- include('../partials/header.ejs')%>
+<link rel="stylesheet" href="/css/tradeStyle.css" />
+<main>
+  <% if(trade){ %>
+  <section class="product">
+    <div class="image">
+      <img
+        class="productImage"
+        alt="productImage"
+        src=" <%= trade.imageURL  %>"
+      />
+      <h6> <%= trade.name  %></h6>
+    </div>
+    <div>
+      <% if(user == trade.createdBy._id) { %>
+      <form>
+        <input value="Edit" type="submit"
+        formmethod="PUT"
+        formaction="/trades/<%= trade._id%>/edit"/>
+        
+        <input value="Delete" type="submit"
+        formmethod="POST"
+        formaction="/trades/<%= trade._id%>?_method=DELETE"/>
+      </form>
+      <% } %>
+    </div>
+
+  </section>
+  <section class="details">
+    <div class="interested">
+      <p>Are you intrested?</p>
+      <input type="button" value="yes" />
+      <input type="button" value="no" />
+    </div>
+    <h2>Details:</h2>
+    <p>
+      <%= trade.details  %>
+    </p>
+  </section>
+    <!-- <section id="test">
+    <p>Select Product</p>
+      <% if(trades.length) { %>
+        <form method="POST" action="/trades/<%=trade._id%>/<%= selected._id%>">
+        <% trades.forEach(selected => { %>
+         
+            <input type="submit" value= "<%= selected.name %>" > 
+        <% }) %>
+      </form>
+     <% } %>
+    </form>
+  </section> -->
+  <%  } else {%>
+    <p>This trade does not exist.</p>
+    <% } %>
+  </main>
+  <%- include('../partials/footer.ejs')%>

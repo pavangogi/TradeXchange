@@ -1,0 +1,19 @@
+main{
+  height: 70vh;
+
+}
+main section{
+    width: 960px;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+li a:link, li svg, li a:visited {
+    color: white;
+    text-decoration: none;
+}

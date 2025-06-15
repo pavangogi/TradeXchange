@@ -1,0 +1,72 @@
+<%- include('../partials/header.ejs')%>
+<link rel="stylesheet" href="/css/tradeStyle.css" />
+<main>
+  <% if(trade){ %>
+  <section class="product">
+    <div class="image">
+      <img
+        class="productImage"
+        alt="productImage"
+        src=" <%= trade.imageURL  %>"
+      />
+      <h6> <%= trade.name  %></h6>
+    </div>
+    <div>
+      <% if(user == trade.createdBy._id) { %>
+      <form>
+        <input value="Edit" type="submit"
+        formmethod="PUT"
+        formaction="/trades/<%= trade._id%>/edit"/>
+        
+        <input value="Delete" type="submit"
+        formmethod="POST"
+        formaction="/trades/<%= trade._id%>?_method=DELETE"/>
+      </form>
+      <% } %>
+    </div>
+
+  </section>
+
+  <section class="details">
+    <% if(user != trade.createdBy._id) { %>
+    <div class="interested">
+      <p>Are you intrested?</p>
+      <form method="POST" action="/transaction/<%=trade._id%>/watchlist">
+        <input type="button" class="btn" data-toggle="modal" data-target="#exampleModalLong" value="Trade">
+        <input class="btn" type="submit" data-toggle="modal" value="Watchlist">
+      </form>
+    </div>
+    <% } %> 
+    <h2>Details:</h2>
+    <p>
+      <%= trade.details  %>
+    </p>
+  </section>
+  <%  } else {%>
+    <p>This trade does not exist.</p>
+    <% } %>
+
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Select Product</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+                <% if(trades.length) { %>
+                  <% trades.forEach(selected => { %>
+                    <form method="POST" action="/transaction/<%= selected.id %>/<%= trade.id %>">
+                      <input type="submit" value= "<%= selected.name %>" > 
+                    </form>
+                  <% }) %>
+               <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+  <%- include('../partials/footer.ejs')%>

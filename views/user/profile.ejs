@@ -1,0 +1,164 @@
+<%- include('../partials/header.ejs')%>
+<link rel="stylesheet" href="/css/profileStyle.css" />
+<main>
+
+<div class = "content">
+    <h5 class="welcome">Welcome, <%=user.firstName%> <%= user.lastName %></h5>
+    </div>
+    <div >
+        <h3>Your Trades</h3>
+        <% if(trades.length){ %>
+                <% trades.forEach(trade => { %> 
+                   <a class="tradelist" href="/trades/<%= trade.id %>"><%=trade.name%></a>               
+            <% })
+        }
+        else { %>
+            <div>
+                you have no Trades.
+            </div>
+        <% }
+        %>
+    </div>
+    <br>
+    <div>
+        <h3> Trade Requests sent:</h3>
+        <% if(sentTransactions.length){ %> 
+        <table>
+            <tr>
+                <th>
+                    By Giving
+                </th>
+                <th>
+                    Asking For
+                </th>
+                <th>
+                    Sent To
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+            <% sentTransactions.forEach( sTransaction => { 
+                if(sTransaction.status == 'pending' ) {%>
+                    <tr>
+                        <td>
+                            <%= sTransaction.giveItem.name %>
+                        </td>
+                        <td>
+                            <%= sTransaction.takeItem.name %>
+                        </td>
+                        <td>
+                            <%= sTransaction.takerId.firstName%> <%= sTransaction.takerId.lastName%>
+                        </td>
+                        <td>
+                            <%= sTransaction.status %>
+                        </td>
+                        <td>
+                            <form method="POST" action="/transaction/<%= sTransaction.id%>">
+                                <input type="submit" value="Cancel">
+                            </form>
+                        </td>
+
+                    </tr>
+            <% }}) %> 
+            <% } else {%> 
+                <p>No Requests Pending</p>
+                <%}%>
+    </table>
+    </div>
+<br>
+
+
+    <div>
+        <h3> Trade Requests Received:</h3>
+        <% if(receivedTransactions.length){ %> 
+            <table>
+                <tr>
+                    <th>You Get</th>
+                    <th>
+                        You Give
+                    </th>
+                    <th>
+                        Sent By
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        Action
+                    </th>
+                </tr>
+            <% receivedTransactions.forEach( rTransaction => { 
+                if(rTransaction.status == 'pending' ) {%>
+                    <tr>
+                        <td>  <%= rTransaction.giveItem.name %> </td>
+                        <td>  <%= rTransaction.takeItem.name %></td>
+                        <td>  <%= rTransaction.giverId.firstName%> <%= rTransaction.giverId.lastName%></td>
+                        <td>  <%= rTransaction.status %></td>
+                        <td>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <form method="POST" action="/transaction/<%=rTransaction.id%>/accept">
+                                            <input type="submit" value="Accept">
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form method="POST" action="/transaction/<%=rTransaction.id%>/reject">
+                                            <input type="submit" value="Reject">
+                                        </form>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+            
+
+            <% }}) %> 
+        <% } else {%> 
+            <p>No Requests Pending</p>
+            <%}%>
+    </table>
+    </div>
+    <br>
+    <div>
+        <h3>
+            Watchlist
+        </h3>
+        <% if(watchlist.length){ %>
+            <table>
+                <tr>
+                    <th>
+                        Item
+                    </th>
+                    <th>
+                        Action
+                    </th>
+                </tr>
+        <% watchlist.forEach(listItem => { %>
+            <tr>
+                <td>
+                    <p><%= listItem.itemId.name %></p>
+                </td>
+                <td>
+                    <form method="POST" action="/transaction/deleteWatch/<%=listItem.id%>?_method=DELETE">
+                        <input type="submit" value="delete">
+                    </form>
+                </td>
+            </tr>
+
+            
+        <% }) %>
+    </table>
+        <% } else {%>
+            <p>No Items in watch list.</p>
+            <% }%>
+    </div>
+
+</main>
+    
+    <%- include('../partials/footer.ejs')%>

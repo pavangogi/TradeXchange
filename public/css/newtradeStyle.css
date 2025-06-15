@@ -1,0 +1,44 @@
+main{
+    height: 20rem;
+    padding: 3rem;
+}
+
+form{
+    height: 100%;
+    width: 50%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.field{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px;
+}
+
+.field label{
+   width: 30%;
+   text-align: right;
+}
+
+.field input{
+    width: 60%;
+    padding: 0.3rem;
+}
+.field textarea{
+    width: 60%;
+    padding: 0.3rem;
+}
+
+.field:last-child{
+    justify-content: end;
+}
+
+.field:last-child input{
+    width: 20%;
+    padding: 0.3rem;
+}
+

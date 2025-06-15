@@ -1,0 +1,50 @@
+main{
+    display: flex;
+    padding: 2rem;
+    overflow-y:scroll;
+  overflow-x:scroll;
+}
+.image{
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+.image img{
+    margin-right: 3rem;
+    height: 12rem;
+    width: auto;
+}
+.product{
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    width: 60%;
+    margin: 0 auto 2rem auto;
+}
+
+.image p{
+    font-size: 2rem;
+}
+
+.interested{
+margin-bottom: 2rem;
+}
+
+.interested input{
+    margin-top: 0.6rem;
+    width: 48%;
+}
+
+.details{
+    width: 60%;
+    margin: 0 auto;
+}
+
+.details h2{
+    margin-bottom: 1rem;
+}
+
+.details p{
+    text-align: justify;
+    line-height: 1.6rem;
+}

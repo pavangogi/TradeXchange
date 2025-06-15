@@ -1,0 +1,30 @@
+<%- include('../partials/header.ejs')%>
+<link rel="stylesheet" href="/css/newtradeStyle.css" />
+<main>
+    <form action="/trades/<%= trade._id %>?_method=PUT" method="POST">
+      <div class="field">
+        <label for="category">Category</label>
+        <input type="text" id="category" name="category" value="<%= trade.category %>" placeholder="Category" required/>
+      </div>
+      <div class="field">
+        <label for="name">Name</label>
+        <input type="text" id="Name" name="name" value="<%= trade.name %>" placeholder="Name" required/>
+      </div>
+      <div class="field">
+        <label for="productType">Product Type</label>
+        <input type="text" id="productType" name="productType" value="<%= trade.productType %>" placeholder="Product Type" required/>
+      </div>
+      <div class="field">
+        <label for="imageURL">Image URL</label>
+        <input type="text" id="imageURL" name="imageURL" value="<%= trade.imageURL %>" placeholder="ImageURL" required/>
+      </div>
+      <div class="field">
+        <label for="details">Details</label>
+        <textarea id="details" rows="3" name="details" placeholder="Details" required><%= trade.details %></textarea>
+      </div>
+      <div class="field">
+          <input type="submit" value="Submit Trade">
+      </div>
+    </form>
+  </main>
+  <%- include('../partials/footer.ejs')%>

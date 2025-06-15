@@ -1,0 +1,59 @@
+<%- include('../partials/header.ejs')%>
+<link rel="stylesheet" href="/css/tradesStyles.css" />
+<main>
+  <% if(trades.length) {%>
+    <% categories.forEach(category =>{ %>
+      <section class="category">
+        <h2><%= category %></h2>
+        <div class="category__list">
+          <% trades.filter(trade => trade.category == category).forEach(trade =>{ %>
+            <article>
+              <a href="./trades/<%= trade._id %>"><h5><%= trade.productType %></h5></a>
+            </article>
+          <% }); %>
+        </div>
+        </section>
+     <%  }); %> 
+  <% } else { %>
+    <section>
+      <p>No Items to display.</p>
+    </section>
+      
+  <% } %>
+  </main>    
+<!--
+  <article>
+          <a href="./trades/trade"><h5>Mac OS</h5></a>
+        </article>
+        <article>
+          <a href="./trades/trade"><h5>Windows OS</h5></a>
+        </article>
+        <article>
+          <a href="./trades/trade"><h5>Linux OS</h5></a>
+        </article>
+      </div>
+    </section>
+
+
+
+
+
+
+    <section class="category">
+      <h2>Accesories</h2>
+      <div class="category__list">
+        <article>
+          <a href="./trades/trade"><h5>Bags,Merchandise</h5></a>
+        </article>
+        <article>
+          <a href="./trades/trade"><h5>Cables & Chargers</h5></a>
+        </article>
+        <article>
+          <a href="./trades/trade"><h5>Others</h5></a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+
+-->        <%- include('../partials/footer.ejs')%>
